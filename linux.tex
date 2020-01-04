@@ -275,6 +275,19 @@
 	\end{frame}
 
 	\begin{frame}
+		\frametitle{rm}
+		\textit{rm} stands for 'Remove'. As its name, you can delete files or directory.
+		\begin{example}
+			\$ rm tmp2
+		\end{example}
+	
+		When you want delete directory, use '-r' option:
+		\begin{example}
+			\$ rm -r directoryname
+		\end{example}
+	\end{frame}
+
+	\begin{frame}
 		\frametitle{sudo}
 		\textit{sudo} is abbr. of "Substitute User do"; but, many people know as "Super User do". \\
 
@@ -371,7 +384,7 @@
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{Output to file}
+		\frametitle{Input/Output to file}
 		If you want redirect output to file, use following example:
 		\begin{example}
 			\$ cat tmp $>$ output
@@ -381,6 +394,8 @@
 		\begin{example}
 			\$ cat tmp $>>$ output
 		\end{example}
+	
+		Also, $<$ means input from file.
 	\end{frame}
 
 	\begin{frame}
@@ -423,6 +438,75 @@
 	\end{frame}
 	
 	\section{How to Download from Web}
+	
+	\begin{frame}
+		\frametitle{Two Ways for Download}
+		There are two main ways for download.
+		\begin{enumerate}
+			\item curl
+			\item wget
+		\end{enumerate}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{curl}
+		\begin{example}
+			\$ curl https://www.naver.com
+		\end{example}
+		\textit{curl} returns to standard output. If you want to get file, consider following:
+		\begin{example}
+			\$ curl https://www.naver.com -o naver.html
+		\end{example}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{wget}
+		\textit{wget} returns a downloaded file as output. 
+		\begin{example}
+			\$ wget https://www.naver.com \\
+			\$ ls
+		\end{example}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{gzip}
+		\textit{gzip} is used for file compression and decompression.
+		
+		When compressing:
+		\begin{example}
+			\$ gzip tmp
+		\end{example}
+	
+		When decompressing:
+		\begin{example}
+			\$ gzip -d tmp.gz
+		\end{example}
+	
+		However, the examples hereinabove delete the original files. If you want \textit{keep} original file, consider following:
+		\begin{example}
+			\$ gzip -k tmp
+		\end{example}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{TAR Files}
+		\textit{TAR} stands for "Tape Archives". \\
+		Originally, it is used for tape; but, in nowadays, it is used for file archiving system. Usually, make a directory to one TAR files. \\
+		TAR.GZ file is commonly used for distribution some software. For example:
+		\begin{example}
+			\$ wget https://www.python.org/ftp/python/3.8.1/Python-3.8.1.tgz
+		\end{example}
+		(TGZ is for TAR.GZ)
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{TAR Files \textit{(Cont.)}}
+		You might think decompress TGZ file and make a directory from TAR file. However, you can decompress TGZ file at once:
+		\begin{example}
+			\$ tar -zxvf Python-3.8.1.tgz
+		\end{example}
+		Then, you can see the directory named 'Python-3.8.1".
+	\end{frame}
 	
 	\section{User Permissions}
 	
