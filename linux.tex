@@ -205,7 +205,45 @@
 			\caption{Result of \textit{ls} command}
 		\end{figure}
 		All directory has '.' and '..', even though the directory is empty. \\
-		'.' means current folder itself; and, '..' means parent folder.
+		'.' means current directory itself; and, '..' means parent directory.
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{touch}
+		\textit{touch} command make new file or touch the file.
+		
+		Try following example:
+		\begin{example}
+			\$ cd \\
+			\$ touch t \\
+			\$ ls
+		\end{example}
+		
+		Then, you can see that the file which name 't' has been made. 
+	
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.5 \linewidth]{figures/8.png}
+			\caption{Result of \textit{touch} Command}
+		\end{figure}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{mv}
+		\textit{mv} command moves/renames file. \textit{mv} is used as:
+		\begin{example}
+			\$ mv SRC(source) DST(destination)
+		\end{example}
+		
+		Try following commands: 
+		\begin{example}
+			\$ mv t tmp \\
+			\$ ls \\
+			\$ mv tmp test/ \\
+			\$ ls
+		\end{example}
+	
+		Then, you will realize that the file 'tmp' is gone. I hope that you already know where the file goes. :)
 	\end{frame}
 
 	\begin{frame}
@@ -234,6 +272,30 @@
 			\caption{Descriptions of Editor}
 		\end{figure}
 		For this reason, this guide use VIM editor. 
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Editor \textit{Cont.}}
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.7 \linewidth]{figures/curves.jpg}
+			\caption{Learning Curves among Editors}
+		\end{figure}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{First Meet with VIM}
+		With these commands, you can make/edit file.
+
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Modes of VIM}
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.7 \linewidth]{figures/modes.png}
+			\caption{Three Modes in VIM}
+		\end{figure}
 	\end{frame}
 	
 	\section{How to Download from Web}
