@@ -181,6 +181,17 @@
 	\end{frame}
 
 	\begin{frame}
+		\frametitle{Tip!}
+		If you hit "Tab" button, ZSH will give proper candidates. \\
+		Following example shows what ZSH gives.
+		\begin{figure}
+			\centering
+			\includegraphics[width=0.7 \linewidth]{figures/10.png}
+			\caption{Shortcut with Tab}
+		\end{figure}
+	\end{frame}
+
+	\begin{frame}
 		\frametitle{man and -$ $-help}
 		You can get detailed information about command as following:
 		\begin{example}
@@ -345,12 +356,75 @@
 		\end{example}
 		Then, all plugin acts properly without errors. 
 	\end{frame}
+
+	\section{IO Redirections}
+	
+	\begin{frame}
+		\frametitle{cat}
+		\textit{cat} stands for con\textbf{cat}enate. \textit{cat} command reads files, and writing them to standard output. \\
+		Consider following example:
+		\begin{example}
+			\$ cd $\sim$/test/ \\
+			\$ cat tmp 
+		\end{example}
+		You can see contents of file. 
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Output to file}
+		If you want redirect output to file, use following example:
+		\begin{example}
+			\$ cat tmp $>$ output
+		\end{example}
+		However, this method \textit{overwrites} the contents of file. \\
+		If you want preserve the file contents, use following: 
+		\begin{example}
+			\$ cat tmp $>>$ output
+		\end{example}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Output to file \textit{Cont.}}
+		In some cases, you should divide standard output and standard error. \\
+		In these cases, use following commands:
+		\begin{example}
+			\$ commands 1$>$ STDOUT 2$>$ STDERR
+		\end{example}
+	
+		\begin{example}
+			\$ cat tmp 1$>$ ex.stdout 2$>$ ex.stderr 
+		\end{example}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{more / less}
+		\textit{more} and \textit{less} are commands for seeing the contents of file.
+		Consider following examples:
+		\begin{example}
+			\$ more tmp
+		\end{example}
+	
+		\begin{example}
+			\$ less tmp
+		\end{example}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Pipe}
+		Use pipe ($|$) to indicate input as output of previous command.
+		\begin{example}
+			\$ command1 $|$ command2
+		\end{example}
+		The output of command 1 will be the input of command2. \\
+		Consider following example: 
+		\begin{example}
+			\$ cat tmp $|$ less
+		\end{example}
+	\end{frame}
 	
 	\section{How to Download from Web}
 	
 	\section{User Permissions}
-	
-	\section{IO Redirections}
 	
 	\section{Process Control}
 	
