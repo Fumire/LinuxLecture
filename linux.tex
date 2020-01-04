@@ -98,7 +98,7 @@
 		\end{figure}
 		\textit{pwd} is abbr. of "Print Working Directory". \\
 		You can see where you are with \textit{pwd} command. \\
-		Also, "/home/username" is your \textit{home folder}.
+		Also, "/home/username" is your \textit{home folder}, a.k.a. '$\sim$'.
 	\end{frame}
 
 	\begin{frame}
@@ -179,7 +179,51 @@
 			\caption{\textit{cd} will guide you to home folder}
 		\end{figure}
 	\end{frame}
+
+	\begin{frame}
+		\frametitle{man and -$ $-help}
+		You can get detailed information about command as following:
+		\begin{example}
+			\$ man ls \\
+			and/or \\
+			\$ ls -$ $-help
+		\end{example}
+		This guide will give simple information about Linux command. Hence, when you have curiosity about command, use these command.
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Directory Structure}
+		Try following commands:
+		\begin{example}
+			\$ cd test\\
+			\$ ls -al
+		\end{example}
+		Then, you can see like this:
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.3 \linewidth]{figures/7.png}
+			\caption{Result of \textit{ls} command}
+		\end{figure}
+		All directory has '.' and '..', even though the directory is empty. \\
+		'.' means current folder itself; and, '..' means parent folder.
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{sudo}
+		\textit{sudo} is abbr. of "Substitute User do"; but, many people know as "Super User do". \\
+
+		\textit{sudo} allows a system administrator to delegate authority to give certain user the ability to run some command as another user.
+		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.3 \linewidth]{figures/sudo.png}
+			\caption{XKCD: Sandwich}
+		\end{figure}
 	
+		THINK what will happen after sudo command!!
+		
+	\end{frame}
+
 	\section{Edit File with VIM}
 	
 	\section{How to Download from Web}
