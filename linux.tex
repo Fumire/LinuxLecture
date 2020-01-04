@@ -97,20 +97,45 @@
 			\caption{Result of \textit{pwd} Command}
 		\end{figure}
 		\textit{pwd} is abbr. of "Print Working Directory". \\
-		You can see where you are with \textit{pwd} command.
+		You can see where you are with \textit{pwd} command. \\
+		Also, "/home/username" is your \textit{home folder}.
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{ls}
 		\begin{figure}[h!]
 			\centering
-			\includegraphics[width=0.5 \linewidth]{figures/3.png}
+			\includegraphics[width=0.7 \linewidth]{figures/3.png}
 			\caption{Result of \textit{ls} Command}
 		\end{figure}
 	
 		\textit{ls} stands for "List". \\
 		\textit{ls} command lists current directory contents. \\
 		If current directory is empty, the result will be nothing. 
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Configuration}
+		However, you have not completed configuration. Therefore, finish settings with following command:
+		\begin{example}
+			\$ git clone https://github.com/Fumire/.dotfiles.git \\
+			\$ cd .dotfiles \\
+			\$ make \\
+			\$ chsh -s /usr/bin/zsh
+		\end{example}
+		Note that you should input command only after '\$'. \\
+		After executing commands, you should restart your shell. 
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Configuration \textit{(Cont.)}}
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.7 \linewidth]{figures/4.png}
+			\caption{ZSH}
+		\end{figure}
+	
+		With successful configuration, you can see like this. 
 	\end{frame}
 	
 	\section{Edit File with VIM}
