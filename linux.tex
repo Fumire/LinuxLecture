@@ -304,7 +304,7 @@
 		\frametitle{First Meet with VIM}
 		With these commands, you can make/edit file.
 		\begin{example}
-			\$ vi filename
+			\$ vi tmp
 		\end{example}
 	
 		If it is first time to open VIM, then you will see like this. 
@@ -322,6 +322,28 @@
 			\includegraphics[width=0.7 \linewidth]{figures/modes.png}
 			\caption{Three Modes in VIM}
 		\end{figure}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{How to Edit with VIM}
+		Editing with VIM is following such steps:
+		\begin{enumerate}
+			\item Press 'i'
+			\item Edit the file
+			\item Press 'ESC'
+			\item Enter ':w' which means \textit{write}
+			\item Enter ':q' wihch means \textit{quit}
+		\end{enumerate}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Plugin Setting (Optional)}
+		You might see the error message because the plugin setting is not completed. To solve this, use following commands:
+		\begin{example}
+			\$ cd $\sim$/.vim/plugged/tabnine-vim/ \\
+			\$ python3 install.py 
+		\end{example}
+		Then, all plugin acts properly without errors. 
 	\end{frame}
 	
 	\section{How to Download from Web}
