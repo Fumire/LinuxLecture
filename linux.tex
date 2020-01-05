@@ -673,5 +673,79 @@
 	\end{frame}
 	
 	\section{Process Control with SGE}
+	
+	\begin{frame}
+		\frametitle{Sun Grid Engine (SGE)}
+		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.5 \linewidth]{figures/SGE.png}
+			\caption{Sun Grid Engine}
+		\end{figure}
+		
+		We use server, not dedicated machine. Therefore, all resources should be distributed with all users. \\
+		SGE can be a solution for distribution of resources. 
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Script File}
+		Script file is a text file containing a collection of SHELL statements. 
+		
+		Make a script file via VIM as:
+		\begin{example}
+			\$ vi tmp.sh
+		\end{example}
+	
+		Also, the file contents should be:
+		\begin{example}
+			sleep 99999
+		\end{example}
+	
+		You can execute the script file as:
+		\begin{example}
+			\$ sh tmp.sh
+		\end{example}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{qsub}
+		You can submit the script file for execute with \textit{qsub} command:
+		\begin{example}
+			\$ qsub tmp.sh
+		\end{example}
+	
+		When you want to designate the log file names, consider following:
+		\begin{example}
+			\$ qsub -e errorlog -o outputlog tmp.sh
+		\end{example}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{qstat}
+		You can check your jobs with \textit{qstat} command:
+		\begin{example}
+			\$ qstat
+		\end{example}
+	
+		If you want to check jobs from all users, consider following:
+		\begin{example}
+			\$ qstat -u "*"
+		\end{example}
+	
+		Note that you should record job-ID for further handling.
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{qdel}
+		If you want to delete submitted jobs, you can use \textit{qdel} command:
+		\begin{example}
+			\$ qdel job-ID
+		\end{example}
+	
+		If you want to delete all jobs from you, consider following:
+		\begin{example}
+			\$ qdel -u "username"
+		\end{example}
+	\end{frame}
 
 \end{document}
