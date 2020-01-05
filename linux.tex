@@ -584,6 +584,94 @@
 	
 	\section{Process Control}
 	
+	\begin{frame}
+		\frametitle{Ctrl-C}
+		When you have started command, but you realize that you should stop the command, then use "Ctrl-C".
+		\begin{example}
+			\$ sleep 99999 \\
+			\$ \^{}C
+		\end{example}
+	
+		Ctrl-C sends SIGINT, which stands for "Signal Interruption"; and, the process is going to terminate after receiving SIGINT.
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{\&}
+		Consider long-time procedure, such as:
+		\begin{example}
+			\$ sleep 99999
+		\end{example}
+	
+		However, with '\&', you do not have to wait procedure.
+		\begin{example}
+			\$ sleep 99999 \&
+		\end{example}
+		Then, the process is executing on background. 
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{jobs}
+		\textit{jobs} commands shows the background process.
+		\begin{example}
+			\$ jobs
+		\end{example}
+	
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.5 \linewidth]{figures/12.png}
+			\caption{Result of \textit{jobs}}
+		\end{figure}
+		You use record the [number] for handle the process. \\
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{kill}
+		\textit{kill} command kills the process. 
+		
+		When you want to kill background process, consider following:
+		\begin{example}
+			\$ kill \%number
+		\end{example}
+		The number is from the \textit{jobs} command. 
+		
+		\begin{example}
+			\$ kill process\_number
+		\end{example}
+		You can kill as above when you know exact process number (PID). 
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{nohup}
+		When you lost from SSH connection, all executing process receive SIGHUP, which stands for Signal Hangup, and will be terminate even they runs on background. \\
+		To prevent SIGHUP, use \textit{nohup} command. 
+		
+		\begin{example}
+			\$ nohup sleep 99999 \&
+		\end{example}
+	
+		However, \textit{nohup} command makes 'nohup.out' automatically. You can change output file name with IO redirection. 
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{screen}
+		\textit{screen} prevents unintentional connection lost. 
+		
+		Make screen session with simple command:
+		\begin{example}
+			\$ screen
+		\end{example}
+	
+		When you want to detach the screen session, use following, instead of \textit{exit}:
+		\begin{example}
+			\$ \^{}a, d
+		\end{example}
+	
+		When you restore the screen session, use following command:
+		\begin{example}
+			\$ screen -r
+		\end{example}
+	\end{frame}
+	
 	\section{Process Control with SGE}
 
 \end{document}
