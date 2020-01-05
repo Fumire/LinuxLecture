@@ -285,6 +285,8 @@
 		\begin{example}
 			\$ rm -r directoryname
 		\end{example}
+	
+		There is no way to restore removed files!! Beware what you remove!!
 	\end{frame}
 
 	\begin{frame}
@@ -509,6 +511,76 @@
 	\end{frame}
 	
 	\section{User Permissions}
+	
+	\begin{frame}
+		\frametitle{Permissions}
+		With the following command, we can know how permissions are set:
+		\begin{example}
+			\$ ls -al
+		\end{example}
+	
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.4 \linewidth]{figures/11.png}
+			\caption{File Permissions}
+		\end{figure}
+	
+		The way to read this result is following:
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.5 \linewidth]{figures/permissions.jpg}
+			\caption{How to Read Permissions}
+		\end{figure}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{chmod}
+		\textit{chmod} stands for "Change Mode". You can modify permissions of files.
+		
+		Before input command, you should calculate simple arithmetic:
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.4 \linewidth]{figures/permissions2.png}
+			\caption{Simple Arithmetic}
+		\end{figure}
+		Then, you will get three digits for permission. Moreover, 660 or 770 are usually used. 
+	
+		\begin{example}
+			\$ chmod three\_digits filename
+		\end{example}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{chmod \textit{(Cont.)}}
+		Or, you can do as followings:
+		
+		\begin{example}
+			\$ chmod rwx-$ $-$ $-$ $-$ $-$ $- tmp
+		\end{example}
+	
+		\begin{example}
+			\$ chmod g=rwx tmp
+		\end{example}
+	
+		\begin{example}
+			\$ chmod +x tmp
+		\end{example}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{chown}
+		\textit{chown} stands for "change ownership". As its name, you can modify ownership of file.
+		
+		When you want to change only USER:
+		\begin{example}
+			\$ chown USER tmp
+		\end{example}
+	
+		When you want to change both USER and GROUP:
+		\begin{example}
+			\$ chown USER:GROUP tmp
+		\end{example}
+	\end{frame}
 	
 	\section{Process Control}
 	
