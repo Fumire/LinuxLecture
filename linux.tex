@@ -30,17 +30,17 @@
 
 	\begin{frame}
 		\frametitle{Introduction}
-		
-		In this guide, I assume that followings are already installed:
+
+		In this guide, I assume that you can open a Linux shell in one of these ways:
 		\begin{enumerate}
-			\item Ubuntu 16.04.2 or Higher
-			\item ZSH 5.0.2 or Higher
-			\item VIM 8.1 or Higher
-			\item We will connect to server via SSH
+			\item A current Ubuntu LTS desktop, WSL, or course-provided Linux server
+			\item A terminal running bash or zsh
+			\item A basic terminal editor such as Vim, Neovim, or nano
+			\item SSH access if the lab uses a remote server
 		\end{enumerate}
 
-		With this guide, you can use and understand Linux system. \\
-		Also, this guide includes as little information about operating system as possible. If you find some fault in the strict sense of the word, that means you are not \textbf{beginner}. 
+		With this guide, you can use and understand a Linux system. \\
+		The commands are written for a beginner lab in 2026. Your prompt, user name, host name, or Linux distribution may look different, and that is fine.
 	\end{frame}
 
 	\begin{frame}
@@ -49,7 +49,7 @@
 	\end{frame}
 
 	\section{Linux?}
-	
+
 	\begin{frame}
 		\frametitle{Linux?}
 		\begin{figure}[h!]
@@ -57,10 +57,10 @@
 			\includegraphics[width=0.4 \linewidth]{figures/linus.jpg}
 			\caption{Linus Torvalds, Inventor of Linux}
 		\end{figure}
-	
-		Linux is one of the most famous OS as Windows and macOS. \\
-		Linux is open-source project. \\
-		Android, OS for mobile, is based on Linux. 
+
+		Linux is a widely used operating system family, alongside Windows and macOS. \\
+		Linux is open source and is used on servers, cloud systems, laptops, embedded devices, and phones. \\
+		Android, a mobile operating system, is based on Linux.
 	\end{frame}
 
 	\begin{frame}
@@ -70,12 +70,12 @@
 			\includegraphics[width=0.3 \linewidth]{figures/ubuntu.jpg}
 			\caption{Logo of Ubuntu}
 		\end{figure}
-		Ubuntu is an OS which is based on Linux. \\
-		Ubuntu is the best OS in Linux-like OS, because of convenience of its installation and usage.
+		Ubuntu is a beginner-friendly Linux distribution. \\
+		It is common in classrooms, cloud images, WSL, and personal machines, but most commands in this guide also work on other Linux distributions.
 	\end{frame}
-	
+
 	\section{Basic Linux Command}
-	
+
 	\begin{frame}
 		\frametitle{Where we start}
 		\begin{figure}[h!]
@@ -83,10 +83,10 @@
 			\includegraphics[width=0.5 \linewidth]{figures/1.png}
 			\caption{Here is where we start}
 		\end{figure}
-	
-		After you connect to server via SSH, you can see like this. \\
+
+		After you open a terminal or connect to a server via SSH, you may see a prompt like this. \\
 		Here is where we start! \\
-		\textit{fumire} will be user name, and \textit{fumire-raspberry} will be server name. 
+		The text before `@' is the user name, and the text after `@' is the server or computer name.
 	\end{frame}
 
 	\begin{frame}
@@ -108,23 +108,22 @@
 			\includegraphics[width=0.7 \linewidth]{figures/3.png}
 			\caption{Result of \textit{ls} Command}
 		\end{figure}
-	
+
 		\textit{ls} stands for "List". \\
 		\textit{ls} command lists current directory contents. \\
-		If current directory is empty, the result will be nothing. 
+		If current directory is empty, the result will be nothing.
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{Configuration}
-		However, you have not completed configuration. Therefore, finish settings with following command:
+		Before starting the lab, make a small working directory. No custom dotfiles, shell theme, or plugin setup is required.
 		\begin{example}
-			\$ git clone https://github.com/Fumire/.dotfiles.git \\
-			\$ cd .dotfiles \\
-			\$ make \\
-			\$ chsh -s /usr/bin/zsh
+			\$ mkdir -p $\sim$/linux-lab \\
+			\$ cd $\sim$/linux-lab \\
+			\$ pwd
 		\end{example}
-		Note that you should input command only after '\$'. \\
-		After executing commands, you should restart your shell. 
+		Note that you should input only the command after '\$'. \\
+		If you use your own Ubuntu machine and a command is missing, install the basic tools with \textit{sudo apt install vim curl wget screen}.
 	\end{frame}
 
 	\begin{frame}
@@ -132,10 +131,10 @@
 		\begin{figure}[h!]
 			\centering
 			\includegraphics[width=0.7 \linewidth]{figures/4.png}
-			\caption{ZSH}
+			\caption{Shell Prompt}
 		\end{figure}
-	
-		With successful configuration, you can see like this. 
+
+		Your prompt may look different from this image. The important part is that you know which directory you are in.
 	\end{frame}
 
 	\begin{frame}
@@ -145,21 +144,20 @@
 			\includegraphics[width=0.7 \linewidth]{figures/5.png}
 			\caption{Right Command vs. Wrong Command}
 		\end{figure}
-		
-		You can easily know this command is right with ZSH as figure.  
+
+		Many shells highlight valid commands or paths. Treat this as a helpful hint, not as a replacement for reading the command before pressing Enter.
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{mkdir}
 		\textit{mkdir} stands for "Make Directory". \\
-		You can make a directory which named 'test' as following: 
+		You can make a directory which named 'test' as following:
 		\begin{example}
 			\$ mkdir test \\
-			or \\
-			\$ md test \\
+			\$ ls
 		\end{example}
-		\textit{mkdir} returns nothing. Literally, \textit{mkdir} command only make directory. \\
-		You can check that the directory has been made with \textit{ls} command. 
+		\textit{mkdir} returns nothing when it succeeds. Literally, \textit{mkdir} command only makes a directory. \\
+		You can check that the directory has been made with \textit{ls} command.
 	\end{frame}
 
 	\begin{frame}
@@ -171,7 +169,7 @@
 			\$ cd test\\
 			\$ pwd \\
 		\end{example}
-	
+
 		Also, you can go your home folder at once with \textit{cd}, no matter where you are.
 		\begin{figure}[h!]
 			\centering
@@ -182,8 +180,8 @@
 
 	\begin{frame}
 		\frametitle{Tip!}
-		If you hit "Tab" button, ZSH will give proper candidates. \\
-		Following example shows what ZSH gives.
+		If you hit the "Tab" key, bash and zsh can complete file names, directory names, and commands. \\
+		Following example shows what tab completion gives.
 		\begin{figure}
 			\centering
 			\includegraphics[width=0.7 \linewidth]{figures/10.png}
@@ -199,7 +197,7 @@
 			and/or \\
 			\$ ls -$ $-help
 		\end{example}
-		This guide will give simple information about Linux command. Hence, when you have curiosity about command, use these command.
+		This guide gives simple information about Linux commands. When you want more detail about a command, use these commands.
 	\end{frame}
 
 	\begin{frame}
@@ -222,16 +220,16 @@
 	\begin{frame}
 		\frametitle{touch}
 		\textit{touch} command make new file or touch the file.
-		
+
 		Try following example:
 		\begin{example}
 			\$ cd \\
 			\$ touch t \\
 			\$ ls
 		\end{example}
-		
-		Then, you can see that the file which name 't' has been made. 
-	
+
+		Then, you can see that the file which name 't' has been made.
+
 		\begin{figure}[h!]
 			\centering
 			\includegraphics[width=0.5 \linewidth]{figures/8.png}
@@ -245,15 +243,15 @@
 		\begin{example}
 			\$ mv SRC(source) DST(destination)
 		\end{example}
-		
-		Try following commands: 
+
+		Try following commands:
 		\begin{example}
 			\$ mv t tmp \\
 			\$ ls \\
 			\$ mv tmp test/ \\
 			\$ ls
 		\end{example}
-	
+
 		Then, you will realize that the file 'tmp' is gone. I hope that you already know where the file goes. :)
 	\end{frame}
 
@@ -263,7 +261,7 @@
 		\begin{example}
 			\$ cp SRC DST
 		\end{example}
-	
+
 		Try following commands:
 		\begin{example}
 			\$ cd $\sim$/test/ \\
@@ -271,21 +269,21 @@
 			\$ cp tmp tmp2 \\
 			\$ ls
 		\end{example}
-		Then, you can realize that a new file 'tmp2' has been made. 
+		Then, you can realize that a new file 'tmp2' has been made.
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{rm}
-		\textit{rm} stands for 'Remove'. As its name, you can delete files or directory.
+		\textit{rm} stands for 'Remove'. As its name, you can delete files or directories.
 		\begin{example}
 			\$ rm tmp2
 		\end{example}
-	
-		When you want delete directory, use '-r' option:
+
+		When you want to delete a directory, use '-r' option:
 		\begin{example}
 			\$ rm -r directoryname
 		\end{example}
-	
+
 		There is no way to restore removed files!! Beware what you remove!!
 	\end{frame}
 
@@ -294,27 +292,27 @@
 		\textit{sudo} is abbr. of "Substitute User do"; but, many people know as "Super User do". \\
 
 		\textit{sudo} allows a system administrator to delegate authority to give certain user the ability to run some command as another user.
-		
+
 		\begin{figure}[h!]
 			\centering
 			\includegraphics[width=0.3 \linewidth]{figures/sudo.png}
 			\caption{XKCD: Sandwich}
 		\end{figure}
-	
+
 		THINK what will happen after \textit{sudo} command!!
 	\end{frame}
 
-	\section{Edit File with VIM} 
-	
+	\section{Edit File with Vim}
+
 	\begin{frame}
 		\frametitle{Editor}
-		There are three major editors in Linux.
+		Common choices include nano, Vim/Neovim, Emacs, and VS Code Remote SSH.
 		\begin{figure}[h!]
 			\centering
 			\includegraphics[width=0.7 \linewidth]{figures/editor.png}
 			\caption{Descriptions of Editor}
 		\end{figure}
-		For this reason, this guide use VIM editor. 
+		This guide uses Vim because it is available on many servers.
 	\end{frame}
 
 	\begin{frame}
@@ -327,62 +325,64 @@
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{First Meet with VIM}
+		\frametitle{First Meet with Vim}
 		With these commands, you can make/edit file.
 		\begin{example}
-			\$ vi tmp
+			\$ vim notes.txt
 		\end{example}
-	
-		If it is first time to open VIM, then you will see like this. 
+
+		If it is your first time to open Vim, then you may see something like this.
 		\begin{figure}[h!]
 			\centering
 			\includegraphics[width=0.5 \linewidth]{figures/9.png}
-			\caption{First Time of VIM}
+			\caption{First Time of Vim}
 		\end{figure}
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{Modes of VIM}
+		\frametitle{Modes of Vim}
 		\begin{figure}[h!]
 			\centering
 			\includegraphics[width=0.7 \linewidth]{figures/modes.png}
-			\caption{Three Modes in VIM}
+			\caption{Three Modes in Vim}
 		\end{figure}
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{How to Edit with VIM}
-		Editing with VIM is following such steps:
+		\frametitle{How to Edit with Vim}
+		Editing with Vim follows these steps:
 		\begin{enumerate}
 			\item Press 'i'
 			\item Edit the file
 			\item Press 'ESC'
 			\item Enter ':w' which means \textit{write}
-			\item Enter ':q' wihch means \textit{quit}
+			\item Enter ':q' which means \textit{quit}
 		\end{enumerate}
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{Plugin Setting (Optional)}
-		You might see the error message because the plugin setting is not completed. To solve this, use following commands:
+		\frametitle{Editor Practice (Optional)}
+		No Vim plugin is required for this lab. If you want a guided practice session, run:
 		\begin{example}
-			\$ cd $\sim$/.vim/plugged/tabnine-vim/ \\
-			\$ python3 install.py 
+			\$ vimtutor
 		\end{example}
-		Then, all plugin acts properly without errors. 
+		If \textit{vimtutor} is not installed on your own Ubuntu machine, install Vim with:
+		\begin{example}
+			\$ sudo apt install vim
+		\end{example}
 	\end{frame}
 
 	\section{IO Redirections}
-	
+
 	\begin{frame}
 		\frametitle{cat}
 		\textit{cat} stands for con\textbf{cat}enate. \textit{cat} command reads files, and writing them to standard output. \\
 		Consider following example:
 		\begin{example}
 			\$ cd $\sim$/test/ \\
-			\$ cat tmp 
+			\$ cat tmp
 		\end{example}
-		You can see contents of file. 
+		You can see contents of file.
 	\end{frame}
 
 	\begin{frame}
@@ -392,11 +392,11 @@
 			\$ cat tmp $>$ output
 		\end{example}
 		However, this method \textit{overwrites} the contents of file. \\
-		If you want preserve the file contents, use following: 
+		If you want preserve the file contents, use following:
 		\begin{example}
 			\$ cat tmp $>>$ output
 		\end{example}
-	
+
 		Also, $<$ means input from file.
 	\end{frame}
 
@@ -407,9 +407,9 @@
 		\begin{example}
 			\$ commands 1$>$ STDOUT 2$>$ STDERR
 		\end{example}
-	
+
 		\begin{example}
-			\$ cat tmp 1$>$ ex.stdout 2$>$ ex.stderr 
+			\$ cat tmp 1$>$ ex.stdout 2$>$ ex.stderr
 		\end{example}
 	\end{frame}
 
@@ -420,12 +420,12 @@
 		\begin{example}
 			\$ more tmp
 		\end{example}
-	
+
 		\begin{example}
 			\$ less tmp
 		\end{example}
-	
-		Also, hit "Q" when you want to leave \textit{more} or \textit{less}. 
+
+		Also, hit "Q" when you want to leave \textit{more} or \textit{less}.
 	\end{frame}
 
 	\begin{frame}
@@ -435,14 +435,14 @@
 			\$ command1 $|$ command2
 		\end{example}
 		The output of command 1 will be the input of command2. \\
-		Consider following example: 
+		Consider following example:
 		\begin{example}
 			\$ cat tmp $|$ less
 		\end{example}
 	\end{frame}
-	
+
 	\section{How to Download from Web}
-	
+
 	\begin{frame}
 		\frametitle{Two Ways for Download}
 		There are two main ways for download.
@@ -455,19 +455,19 @@
 	\begin{frame}
 		\frametitle{curl}
 		\begin{example}
-			\$ curl https://www.naver.com
+			\$ curl https://example.com
 		\end{example}
 		\textit{curl} returns to standard output. If you want to get file, consider following:
 		\begin{example}
-			\$ curl https://www.naver.com -o naver.html
+			\$ curl -L https://example.com -o example.html
 		\end{example}
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{wget}
-		\textit{wget} returns a downloaded file as output. 
+		\textit{wget} returns a downloaded file as output.
 		\begin{example}
-			\$ wget https://www.naver.com \\
+			\$ wget https://example.com -O example.html \\
 			\$ ls
 		\end{example}
 	\end{frame}
@@ -475,17 +475,17 @@
 	\begin{frame}
 		\frametitle{gzip}
 		\textit{gzip} is used for file compression and decompression.
-		
+
 		When compressing:
 		\begin{example}
 			\$ gzip tmp
 		\end{example}
-	
+
 		When decompressing:
 		\begin{example}
 			\$ gzip -d tmp.gz
 		\end{example}
-	
+
 		However, the examples hereinabove delete the original files. If you want \textit{keep} original file, consider following:
 		\begin{example}
 			\$ gzip -k tmp
@@ -495,38 +495,38 @@
 	\begin{frame}
 		\frametitle{TAR Files}
 		\textit{TAR} stands for "Tape Archives". \\
-		Originally, it is used for tape; but, in nowadays, it is used for file archiving system. Usually, make a directory to one TAR files. \\
-		TAR.GZ file is commonly used for distribution some software. For example:
+		Originally, it was used for tape; today, it is used to bundle many files into one archive. \\
+		TAR.GZ files are commonly used for source code and lab data. Replace LAB-URL with the URL from your instructor:
 		\begin{example}
-			\$ wget https://www.python.org/ftp/python/3.8.1/Python-3.8.1.tgz
+			\$ wget LAB-URL -O lab-files.tar.gz
 		\end{example}
 		(TGZ is for TAR.GZ)
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{TAR Files \textit{(Cont.)}}
-		You might think decompress TGZ file and make a directory from TAR file. However, you can decompress TGZ file at once:
+		You might think you must decompress the GZ file and then extract the TAR file. However, you can extract a TGZ or TAR.GZ file at once:
 		\begin{example}
-			\$ tar -zxvf Python-3.8.1.tgz
+			\$ tar -xzf lab-files.tar.gz
 		\end{example}
-		Then, you can see the directory named 'Python-3.8.1".
+		Then, you can see the extracted directory with \textit{ls}.
 	\end{frame}
-	
+
 	\section{User Permissions}
-	
+
 	\begin{frame}
 		\frametitle{Permissions}
 		With the following command, we can know how permissions are set:
 		\begin{example}
 			\$ ls -al
 		\end{example}
-	
+
 		\begin{figure}[h!]
 			\centering
 			\includegraphics[width=0.4 \linewidth]{figures/11.png}
 			\caption{File Permissions}
 		\end{figure}
-	
+
 		The way to read this result is following:
 		\begin{figure}[h!]
 			\centering
@@ -538,15 +538,15 @@
 	\begin{frame}
 		\frametitle{chmod}
 		\textit{chmod} stands for "Change Mode". You can modify permissions of files.
-		
+
 		Before input command, you should calculate simple arithmetic:
 		\begin{figure}[h!]
 			\centering
 			\includegraphics[width=0.4 \linewidth]{figures/permissions2.png}
 			\caption{Simple Arithmetic}
 		\end{figure}
-		Then, you will get three digits for permission. Moreover, 660 or 770 are usually used. 
-	
+		Then, you will get three digits for permission. Moreover, 660 or 770 are usually used.
+
 		\begin{example}
 			\$ chmod three\_digits filename
 		\end{example}
@@ -555,15 +555,15 @@
 	\begin{frame}
 		\frametitle{chmod \textit{(Cont.)}}
 		Or, you can do as followings:
-		
+
 		\begin{example}
 			\$ chmod rwx-$ $-$ $-$ $-$ $-$ $- tmp
 		\end{example}
-	
+
 		\begin{example}
 			\$ chmod g=rwx tmp
 		\end{example}
-	
+
 		\begin{example}
 			\$ chmod +x tmp
 		\end{example}
@@ -572,20 +572,20 @@
 	\begin{frame}
 		\frametitle{chown}
 		\textit{chown} stands for "change ownership". As its name, you can modify ownership of file.
-		
+
 		When you want to change only USER:
 		\begin{example}
 			\$ chown USER tmp
 		\end{example}
-	
+
 		When you want to change both USER and GROUP:
 		\begin{example}
 			\$ chown USER:GROUP tmp
 		\end{example}
 	\end{frame}
-	
+
 	\section{Process Control}
-	
+
 	\begin{frame}
 		\frametitle{Ctrl-C}
 		When you have started command, but you realize that you should stop the command, then use "Ctrl-C".
@@ -593,22 +593,22 @@
 			\$ sleep 99999 \\
 			\$ \^{}C
 		\end{example}
-	
+
 		Ctrl-C sends SIGINT, which stands for "Signal Interruption"; and, the process is going to terminate after receiving SIGINT.
 	\end{frame}
-	
+
 	\begin{frame}
 		\frametitle{\&}
 		Consider long-time procedure, such as:
 		\begin{example}
 			\$ sleep 99999
 		\end{example}
-	
+
 		However, with '\&', you do not have to wait procedure.
 		\begin{example}
 			\$ sleep 99999 \&
 		\end{example}
-		Then, the process is executing on background. 
+		Then, the process is executing on background.
 	\end{frame}
 
 	\begin{frame}
@@ -617,7 +617,7 @@
 		\begin{example}
 			\$ jobs
 		\end{example}
-	
+
 		\begin{figure}[h!]
 			\centering
 			\includegraphics[width=0.5 \linewidth]{figures/12.png}
@@ -628,125 +628,121 @@
 
 	\begin{frame}
 		\frametitle{kill}
-		\textit{kill} command kills the process. 
-		
+		\textit{kill} command kills the process.
+
 		When you want to kill background process, consider following:
 		\begin{example}
 			\$ kill \%number
 		\end{example}
-		The number is from the \textit{jobs} command. 
-		
+		The number is from the \textit{jobs} command.
+
 		\begin{example}
 			\$ kill process\_number
 		\end{example}
-		You can kill as above when you know exact process number (PID). 
+		You can kill as above when you know exact process number (PID).
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{nohup}
 		When you lost from SSH connection, all executing process receive SIGHUP, which stands for Signal Hangup, and will be terminate even they runs on background. \\
-		To prevent SIGHUP, use \textit{nohup} command. 
-		
+		To prevent SIGHUP, use \textit{nohup} command.
+
 		\begin{example}
 			\$ nohup sleep 99999 \&
 		\end{example}
-	
-		However, \textit{nohup} command makes 'nohup.out' automatically. You can change output file name with IO redirection. 
+
+		However, \textit{nohup} command makes 'nohup.out' automatically. You can change output file name with IO redirection.
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{screen}
-		\textit{screen} prevents unintentional connection lost. 
-		
+		\textit{screen} prevents unintentional connection lost.
+
 		Make screen session with simple command:
 		\begin{example}
 			\$ screen
 		\end{example}
-	
+
 		When you want to detach the screen session, use following, instead of \textit{exit}:
 		\begin{example}
 			\$ \^{}a, d
 		\end{example}
-	
+
 		When you restore the screen session, use following command:
 		\begin{example}
 			\$ screen -r
 		\end{example}
 	\end{frame}
-	
-	\section{Process Control with SGE}
-	
+
+	\section{Process Control with Slurm}
+
 	\begin{frame}
-		\frametitle{Sun Grid Engine (SGE)}
-		
-		\begin{figure}[h!]
-			\centering
-			\includegraphics[width=0.5 \linewidth]{figures/SGE.png}
-			\caption{Sun Grid Engine}
-		\end{figure}
-		
-		We use server, not dedicated machine. Therefore, all resources should be distributed with all users. \\
-		SGE can be a solution for distribution of resources. 
+		\frametitle{Slurm}
+
+		We use a shared server or cluster, not a dedicated machine. Therefore, CPU, memory, GPU, and time should be distributed across all users. \\
+		Slurm is a job scheduler. It places your job in a queue, starts it when resources are available, and records the result.
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{Script File}
-		Script file is a text file containing a collection of SHELL statements. 
-		
-		Make a script file via VIM as:
+		Script file is a text file containing a collection of shell statements and Slurm options.
+
+		Make a script file via Vim as:
 		\begin{example}
-			\$ vi tmp.sh
+			\$ vim tmp.sh
 		\end{example}
-	
+
 		Also, the file contents should be:
 		\begin{example}
-			sleep 99999
+			\#!/bin/bash \\
+			\#SBATCH -$ $-job-name=linux-lab \\
+			\#SBATCH -$ $-time=00:05:00 \\
+			\#SBATCH -$ $-cpus-per-task=1 \\
+			hostname \\
+			sleep 30
 		\end{example}
-	
-		You can execute the script file as:
-		\begin{example}
-			\$ sh tmp.sh
-		\end{example}
+
+		Lines beginning with \#SBATCH tell Slurm what resources the job needs.
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{qsub}
-		You can submit the script file for execute with \textit{qsub} command:
+		\frametitle{sbatch}
+		You can submit the script file to the queue with \textit{sbatch} command:
 		\begin{example}
-			\$ qsub tmp.sh
+			\$ sbatch tmp.sh
 		\end{example}
-	
+
 		When you want to designate the log file names, consider following:
 		\begin{example}
-			\$ qsub -e errorlog -o outputlog tmp.sh
+			\$ sbatch -$ $-output=outputlog.txt -$ $-error=errorlog.txt tmp.sh
 		\end{example}
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{qstat}
-		You can check your jobs with \textit{qstat} command:
+		\frametitle{squeue}
+		You can check your jobs with \textit{squeue} command:
 		\begin{example}
-			\$ qstat
+			\$ squeue -u \$USER
 		\end{example}
-	
+
 		If you want to check jobs from all users, consider following:
 		\begin{example}
-			\$ qstat -u "*"
+			\$ squeue
 		\end{example}
-	
-		Note that you should record job-ID for further handling.
+
+		Note that you should record the JOBID for further handling.
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{qdel}
-		If you want to delete submitted jobs, you can use \textit{qdel} command:
+		\frametitle{scancel}
+		If you want to cancel submitted jobs, you can use \textit{scancel} command:
 		\begin{example}
-			\$ qdel job-ID
+			\$ scancel JOBID
 		\end{example}
-	
-		If you want to delete all jobs from you, consider following:
+
+		If you want to cancel all jobs from you, consider following:
 		\begin{example}
-			\$ qdel -u "username"
+			\$ scancel -u \$USER
 		\end{example}
 	\end{frame}
 
