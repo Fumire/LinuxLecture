@@ -18,7 +18,7 @@
 	Ulsan National Institute of Science and Technology
 	\medskip
 	\newline
-	\textit{jwlee230@unist.ac.kr}
+	\textit{jaewoong@unist.ac.kr}
 }
 
 \date{\today}
@@ -145,7 +145,7 @@
 			\caption{Right Command vs. Wrong Command}
 		\end{figure}
 
-		Many shells highlight valid commands or paths. Treat this as a helpful hint, not as a replacement for reading the command before pressing Enter.
+		In this screenshot, valid commands are highlighted in green. Treat this as a helpful hint, not as a replacement for reading the command before pressing Enter.
 	\end{frame}
 
 	\begin{frame}
@@ -411,6 +411,11 @@
 		\begin{example}
 			\$ cat tmp 1$>$ ex.stdout 2$>$ ex.stderr
 		\end{example}
+
+		If you want to save both standard output and standard error in one file:
+		\begin{example}
+			\$ commands 1$>$log 2$>$\&1
+		\end{example}
 	\end{frame}
 
 	\begin{frame}
@@ -548,7 +553,7 @@
 		Then, you will get three digits for permission. Moreover, 660 or 770 are usually used.
 
 		\begin{example}
-			\$ chmod three\_digits filename
+			\$ chmod \textcolor{red}{three\_digits} filename
 		\end{example}
 	\end{frame}
 
@@ -594,6 +599,7 @@
 			\$ \^{}C
 		\end{example}
 
+		In terminal output, \^{} means "Control"; \^{}C means Ctrl-C. \\
 		Ctrl-C sends SIGINT, which stands for "Signal Interruption"; and, the process is going to terminate after receiving SIGINT.
 	\end{frame}
 
@@ -696,7 +702,7 @@
 		\begin{example}
 			\#!/bin/bash \\
 			\#SBATCH -$ $-job-name=linux-lab \\
-			\#SBATCH -$ $-time=00:05:00 \\
+			\#SBATCH -$ $-mem=1G \\
 			\#SBATCH -$ $-cpus-per-task=1 \\
 			hostname \\
 			sleep 30
