@@ -9,6 +9,26 @@ The repository includes both the editable source (`linux.tex`) and a generated
 PDF (`linux.pdf`) so that instructors can either present the existing slides or
 modify and rebuild the deck.
 
+## Table of Contents
+
+- [Audience](#audience)
+- [Repository Contents](#repository-contents)
+- [Quick Start](#quick-start)
+- [Build Requirements](#build-requirements)
+- [Lecture Outline](#lecture-outline)
+  - [1. Linux and Ubuntu](#1-linux-and-ubuntu)
+  - [2. Basic Linux Commands](#2-basic-linux-commands)
+  - [3. Editing Files with Vim](#3-editing-files-with-vim)
+  - [4. Input and Output Redirection](#4-input-and-output-redirection)
+  - [5. Downloading and Archives](#5-downloading-and-archives)
+  - [6. User Permissions](#6-user-permissions)
+  - [7. Process Control](#7-process-control)
+  - [8. Slurm Job Scheduling](#8-slurm-job-scheduling)
+- [Suggested Student Workflow](#suggested-student-workflow)
+- [Safety Notes](#safety-notes)
+- [Customizing the Lecture](#customizing-the-lecture)
+- [License](#license)
+
 ## Audience
 
 This material is intended for first-time Linux users in a classroom, lab, or
