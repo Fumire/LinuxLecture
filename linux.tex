@@ -36,7 +36,7 @@
 			\item A current Ubuntu LTS desktop, WSL, or course-provided Linux server
 			\item A terminal running bash or zsh
 			\item A basic terminal editor such as Vim, Neovim, or nano
-			\item SSH access if the lab uses a remote server
+			\item A registered SSH public key if the lab uses a remote server
 		\end{enumerate}
 
 		With this guide, you can use and understand a Linux system. \\
@@ -72,6 +72,34 @@
 		\end{figure}
 		Ubuntu is a beginner-friendly Linux distribution. \\
 		It is common in classrooms, cloud images, WSL, and personal machines, but most commands in this guide also work on other Linux distributions.
+	\end{frame}
+
+	\section{Remote Server Access}
+
+	\begin{frame}
+		\frametitle{SSH Keys}
+		For the class server, use key-based SSH access.
+		\begin{enumerate}
+			\item Generate a key pair once on your laptop
+			\item Send only the public key to the instructor or server admin
+			\item Keep the private key secret
+		\end{enumerate}
+		\begin{example}
+			\$ ssh-keygen -t ed25519 \\
+			\$ cat $\sim$/.ssh/id\_ed25519.pub \\
+			\$ ssh yourid@class-server
+		\end{example}
+		Password login may be disabled from outside the lab network.
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Jump Host}
+		Some class sessions reach the class server through a jump host. The jump host is only a bridge; do not run your analysis there.
+		\begin{example}
+			\$ ssh -J jump-user@jump-host yourid@class-server
+		\end{example}
+		In MobaXterm, VS Code, or another SSH client, set the class server as the target and the jump host as the SSH gateway or ProxyJump host. \\
+		Use the host, port, and account details provided in class. Do not post them publicly.
 	\end{frame}
 
 	\section{Basic Linux Command}
@@ -123,7 +151,8 @@
 			\$ pwd
 		\end{example}
 		Note that you should input only the command after '\$'. \\
-		If you use your own Ubuntu machine and a command is missing, install the basic tools with \textit{sudo apt install vim curl wget screen}.
+		On the class server, required tools are prepared by the admin. If a command is missing, ask the instructor. \\
+		On your own Ubuntu or WSL machine only, install basic tools with \textit{sudo apt install vim curl wget screen}.
 	\end{frame}
 
 	\begin{frame}
@@ -289,9 +318,8 @@
 
 	\begin{frame}
 		\frametitle{sudo}
-		\textit{sudo} is abbr. of "Substitute User do"; but, many people know as "Super User do". \\
-
-		\textit{sudo} allows a system administrator to delegate authority to give certain user the ability to run some command as another user.
+		\textit{sudo} runs a command with administrator privileges when the server policy allows it. \\
+		On the lab servers, ordinary users should not rely on \textit{sudo}. Package installation, system settings, service restarts, and ownership changes are admin tasks.
 
 		\begin{figure}[h!]
 			\centering
@@ -299,7 +327,7 @@
 			\caption{XKCD: Sandwich}
 		\end{figure}
 
-		THINK what will happen after \textit{sudo} command!!
+		If a command asks for \textit{sudo}, stop and ask the instructor or server admin. Do not try to bypass the policy.
 	\end{frame}
 
 	\section{Edit File with Vim}
@@ -370,6 +398,7 @@
 		\begin{example}
 			\$ sudo apt install vim
 		\end{example}
+		On the class server, ask the instructor instead of using \textit{sudo}.
 	\end{frame}
 
 	\section{IO Redirections}
@@ -577,6 +606,7 @@
 	\begin{frame}
 		\frametitle{chown}
 		\textit{chown} stands for "change ownership". As its name, you can modify ownership of file.
+		On shared lab servers, changing file owner is usually an administrator task.
 
 		When you want to change only USER:
 		\begin{example}
@@ -657,7 +687,8 @@
 			\$ nohup sleep 99999 \&
 		\end{example}
 
-		However, \textit{nohup} command makes 'nohup.out' automatically. You can change output file name with IO redirection.
+		However, \textit{nohup} command makes 'nohup.out' automatically. You can change output file name with IO redirection. \\
+		For long analysis on the shared server, submit a Slurm job instead.
 	\end{frame}
 
 	\begin{frame}
@@ -678,20 +709,22 @@
 		\begin{example}
 			\$ screen -r
 		\end{example}
+		\textit{screen} keeps a shell session alive, but it does not reserve CPU, memory, or GPU resources. Use Slurm for computation.
 	\end{frame}
 
-	\section{Process Control with Slurm}
+	\section{Shared Server Jobs with Slurm}
 
 	\begin{frame}
 		\frametitle{Slurm}
 
-		We use a shared server or cluster, not a dedicated machine. Therefore, CPU, memory, GPU, and time should be distributed across all users. \\
-		Slurm is a job scheduler. It places your job in a queue, starts it when resources are available, and records the result.
+		The lab server is shared. CPU, memory, GPU, storage, and time must be distributed across all users. \\
+		Slurm is the job scheduler. It puts your work in a queue, starts it when resources are available, and writes the result to a log file. \\
+		Use the shell for short checks. Use Slurm for long or resource-heavy work.
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{Script File}
-		Script file is a text file containing a collection of shell statements and Slurm options.
+		\frametitle{Slurm Script}
+		A Slurm script is a small shell script with resource requests at the top.
 
 		Make a script file via Vim as:
 		\begin{example}
@@ -702,54 +735,61 @@
 		\begin{example}
 			\#!/bin/bash \\
 			\#SBATCH -$ $-job-name=linux-lab \\
+			\#SBATCH -$ $-output=slurm-\%j.out \\
+			\#SBATCH -$ $-time=00:05:00 \\
 			\#SBATCH -$ $-mem=1G \\
 			\#SBATCH -$ $-cpus-per-task=1 \\
 			hostname \\
+			date \\
 			sleep 30
 		\end{example}
 
-		Lines beginning with \#SBATCH tell Slurm what resources the job needs.
+		Lines beginning with \#SBATCH tell Slurm the job name, log file, time, memory, and CPU request.
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{sbatch}
-		You can submit the script file to the queue with \textit{sbatch} command:
+		Submit the script to the queue with \textit{sbatch}:
 		\begin{example}
 			\$ sbatch tmp.sh
 		\end{example}
 
-		When you want to designate the log file names, consider following:
+		Slurm prints a job ID. Use that ID to track the job and find the output file:
 		\begin{example}
-			\$ sbatch -$ $-output=outputlog.txt -$ $-error=errorlog.txt tmp.sh
+			\$ squeue -u \$USER \\
+			\$ cat slurm-JOBID.out
 		\end{example}
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{squeue}
-		You can check your jobs with \textit{squeue} command:
+		Check your jobs with \textit{squeue}:
 		\begin{example}
 			\$ squeue -u \$USER
 		\end{example}
 
-		If you want to check jobs from all users, consider following:
-		\begin{example}
-			\$ squeue
-		\end{example}
-
-		Note that you should record the JOBID for further handling.
+		Common states:
+		\begin{enumerate}
+			\item PD: waiting in the queue
+			\item R: running
+			\item CG: finishing and writing output
+		\end{enumerate}
+		If Slurm does not respond, report it to the instructor or server admin.
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{scancel}
-		If you want to cancel submitted jobs, you can use \textit{scancel} command:
+		Cancel a submitted job with \textit{scancel}:
 		\begin{example}
 			\$ scancel JOBID
 		\end{example}
 
-		If you want to cancel all jobs from you, consider following:
+		Cancel all of your own queued or running jobs only when you really mean it:
 		\begin{example}
 			\$ scancel -u \$USER
 		\end{example}
+
+		Record the JOBID after \textit{sbatch}. It is the handle for checking, reading logs, and canceling.
 	\end{frame}
 
 \end{document}
