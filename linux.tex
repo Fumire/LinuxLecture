@@ -721,6 +721,7 @@
 			\#!/bin/bash \\
 			\#SBATCH -{}-job-name=linux-lab \\
 			\#SBATCH -{}-output=slurm-\%j.out \\
+			\#SBATCH -{}-error=slurm-\%j.err \\
 			\#SBATCH -{}-time=00:05:00 \\
 			\#SBATCH -{}-mem=1G \\
 			\#SBATCH -{}-cpus-per-task=1 \\
@@ -728,7 +729,7 @@
 			sleep 30
 		\end{example}
 
-		\#SBATCH lines define the job name, log file, wall time, memory, and CPU request.
+		\#SBATCH lines define the job name, stdout/stderr log files, wall time, memory, and CPU request.
 	\end{frame}
 
 	\begin{frame}

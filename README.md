@@ -203,7 +203,7 @@ job scheduler does and how to submit, inspect, and cancel jobs:
 
 - Write a shell script with `#SBATCH` resource options.
 - Submit a job with `sbatch`.
-- Choose output and error log files with `--output` and `--error`.
+- Choose stdout and stderr log files with `--output` and `--error`.
 - Check jobs with `squeue -u $USER`.
 - Cancel a job with `scancel JOBID`.
 - Cancel all of a user's jobs with `scancel -u $USER`.
