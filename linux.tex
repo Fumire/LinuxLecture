@@ -623,33 +623,33 @@
 
 	\begin{frame}
 		\frametitle{Ctrl-C}
-		When you have started command, but you realize that you should stop the command, then use "Ctrl-C".
+		When a foreground command is running and you want to stop it, press "Ctrl-C".
 		\begin{example}
-			\$ sleep 99999 \\
+			\$ sleep 600 \\
 			\$ \^{}C
 		\end{example}
 
 		In terminal output, \^{} means "Control"; \^{}C means Ctrl-C. \\
-		Ctrl-C sends SIGINT, which stands for "Signal Interruption"; and, the process is going to terminate after receiving SIGINT.
+		Ctrl-C sends SIGINT, which stands for "signal interrupt". Most command-line programs stop after receiving it.
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{\&}
-		Consider long-time procedure, such as:
+		Some commands take longer than a few seconds:
 		\begin{example}
-			\$ sleep 99999
+			\$ sleep 600
 		\end{example}
 
-		However, with '\&', you do not have to wait procedure.
+		Add '\&' to start the command in the background and get your prompt back:
 		\begin{example}
-			\$ sleep 99999 \&
+			\$ sleep 600 \&
 		\end{example}
-		Then, the process is executing on background.
+		The job is still running in this shell. Use \textit{jobs} to see it.
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{jobs}
-		\textit{jobs} commands shows the background process.
+		\textit{jobs} lists background jobs started from the current shell.
 		\begin{example}
 			\$ jobs
 		\end{example}
@@ -659,57 +659,49 @@
 			\includegraphics[width=0.5 \linewidth]{figures/12.png}
 			\caption{Result of \textit{jobs}}
 		\end{figure}
-		You use record the [number] for handle the process. \\
+		The number in square brackets is the job number for this shell. Use it with commands such as \textit{fg}, \textit{bg}, or \textit{kill}. \\
+		If you close the shell, this job list is gone.
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{kill}
-		\textit{kill} command kills the process.
+		\textit{kill} sends a signal to a process. By default, it asks the process to terminate cleanly.
 
-		When you want to kill background process, consider following:
+		To stop a background job from the current shell, use its job number:
 		\begin{example}
-			\$ kill \%number
+			\$ kill \%1
 		\end{example}
-		The number is from the \textit{jobs} command.
+		The number comes from the \textit{jobs} command.
 
 		\begin{example}
-			\$ kill process\_number
+			\$ kill 12345
 		\end{example}
-		You can kill as above when you know exact process number (PID).
+		Use a PID when the process was not started from the current shell. Only stop processes that belong to you.
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{nohup}
-		When you lost from SSH connection, all executing process receive SIGHUP, which stands for Signal Hangup, and will be terminate even they runs on background. \\
-		To prevent SIGHUP, use \textit{nohup} command.
+		If SSH disconnects, the shell may send SIGHUP to commands it started. A background command can stop even though you used '\&'. \\
+		\textit{nohup} tells one command to ignore SIGHUP.
 
 		\begin{example}
-			\$ nohup sleep 99999 \&
+			\$ nohup sleep 600 $>$ sleep.log 2$>$\&1 \&
 		\end{example}
 
-		However, \textit{nohup} command makes 'nohup.out' automatically. You can change output file name with IO redirection. \\
-		For long analysis on the shared server, submit a Slurm job instead.
+		Without redirection, \textit{nohup} writes output to \textit{nohup.out}. Use it for small, simple commands only. \\
+		For long analysis or shared CPU/GPU work, submit a Slurm job instead.
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{screen}
-		\textit{screen} prevents unintentional connection lost.
-
-		Make screen session with simple command:
+		\textit{screen} keeps a terminal session running on the server after SSH disconnects.
 		\begin{example}
-			\$ screen
+			\$ screen -S lab \\
+			Ctrl-a, then d \\
+			\$ screen -r lab
 		\end{example}
-
-		When you want to detach the screen session, use following, instead of \textit{exit}:
-		\begin{example}
-			\$ \^{}a, d
-		\end{example}
-
-		When you restore the screen session, use following command:
-		\begin{example}
-			\$ screen -r
-		\end{example}
-		\textit{screen} keeps a shell session alive, but it does not reserve CPU, memory, or GPU resources. Use Slurm for computation.
+		Press Ctrl-a, then d inside \textit{screen} to detach. It is not a shell command. \\
+		Use \textit{exit} when you are done. \textit{screen} keeps the shell alive, but it does not reserve CPU, memory, or GPU. Use Slurm for computation.
 	\end{frame}
 
 	\section{Shared Server Jobs with Slurm}
@@ -717,44 +709,36 @@
 	\begin{frame}
 		\frametitle{Slurm}
 
-		The lab server is shared. CPU, memory, GPU, storage, and time must be distributed across all users. \\
-		Slurm is the job scheduler. It puts your work in a queue, starts it when resources are available, and writes the result to a log file. \\
-		Use the shell for short checks. Use Slurm for long or resource-heavy work.
+		The lab server is shared. CPU, memory, GPU, storage, and time are distributed across all users. \\
+		Slurm is the job scheduler. It queues your work, starts it when the requested resources are available, and writes output to log files. \\
+		Use the shell for quick checks and file editing. Use Slurm for long runs, many cores, high memory, or GPU jobs.
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{Slurm Script}
-		A Slurm script is a small shell script with resource requests at the top.
-
-		Make a script file via Vim as:
-		\begin{example}
-			\$ vim tmp.sh
-		\end{example}
-
-		Also, the file contents should be:
+		A Slurm script is a shell script with resource requests at the top. Create \textit{hello-slurm.sh} with your editor, then add:
 		\begin{example}
 			\#!/bin/bash \\
-			\#SBATCH -$ $-job-name=linux-lab \\
-			\#SBATCH -$ $-output=slurm-\%j.out \\
-			\#SBATCH -$ $-time=00:05:00 \\
-			\#SBATCH -$ $-mem=1G \\
-			\#SBATCH -$ $-cpus-per-task=1 \\
+			\#SBATCH -{}-job-name=linux-lab \\
+			\#SBATCH -{}-output=slurm-\%j.out \\
+			\#SBATCH -{}-time=00:05:00 \\
+			\#SBATCH -{}-mem=1G \\
+			\#SBATCH -{}-cpus-per-task=1 \\
 			hostname \\
-			date \\
 			sleep 30
 		\end{example}
 
-		Lines beginning with \#SBATCH tell Slurm the job name, log file, time, memory, and CPU request.
+		\#SBATCH lines define the job name, log file, wall time, memory, and CPU request.
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{sbatch}
 		Submit the script to the queue with \textit{sbatch}:
 		\begin{example}
-			\$ sbatch tmp.sh
+			\$ sbatch hello-slurm.sh
 		\end{example}
 
-		Slurm prints a job ID. Use that ID to track the job and find the output file:
+		Slurm prints a job ID, such as "Submitted batch job 12345". Save that ID to track the job and find the output file:
 		\begin{example}
 			\$ squeue -u \$USER \\
 			\$ cat slurm-JOBID.out
@@ -763,7 +747,7 @@
 
 	\begin{frame}
 		\frametitle{squeue}
-		Check your jobs with \textit{squeue}:
+		Check queued and running jobs with \textit{squeue}:
 		\begin{example}
 			\$ squeue -u \$USER
 		\end{example}
@@ -772,9 +756,9 @@
 		\begin{enumerate}
 			\item PD: waiting in the queue
 			\item R: running
-			\item CG: finishing and writing output
+			\item CG: completing and writing output
 		\end{enumerate}
-		If Slurm does not respond, report it to the instructor or server admin.
+		A PD job is not broken; it is waiting for resources or priority. If Slurm does not respond, report it to the instructor or server admin.
 	\end{frame}
 
 	\begin{frame}
@@ -789,7 +773,7 @@
 			\$ scancel -u \$USER
 		\end{example}
 
-		Record the JOBID after \textit{sbatch}. It is the handle for checking, reading logs, and canceling.
+		The JOBID from \textit{sbatch} is the handle for checking, reading logs, and canceling. Use the all-job cancel command carefully.
 	\end{frame}
 
 \end{document}
